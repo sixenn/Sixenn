@@ -9,17 +9,29 @@ import dev.kord.x.commands.kord.model.prefix.mention
 import dev.kord.x.commands.model.context.CommonContext
 import dev.kord.x.commands.model.prefix.literal
 import dev.kord.x.commands.model.prefix.or
+import dev.nekkan.sixenn.common.Sixenn
+import dev.nekkan.sixenn.platforms.discord.services.EmptyServices
 import io.github.config4k.extract
 import kapt.kotlin.generated.configure
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-internal val sixennConfig = ConfigFactory.parseString(SixennConfig::class.java.getResource("/sixenn.conf").readText())
-    .extract<SixennConfig>()
+object SixennDiscord : Sixenn<DiscordSixennConfiguration, EmptyServices> {
 
-suspend fun main() = bot(sixennConfig.sixenn.discord.token) {
+    override val configuration =
+        ConfigFactory.parseString(DiscordSixennConfiguration::class.java.getResource("/sixenn.conf").readText())
+            .extract<DiscordSixennConfiguration>()
+
+    override val services: EmptyServices
+        get() = EmptyServices
+
+}
+
+inline val sixenn: SixennDiscord get() = SixennDiscord
+
+suspend fun main() = bot(sixenn.configuration.sixenn.discord.token) {
     prefix {
         add(CommonContext) {
-            literal(sixennConfig.sixenn.defaultPrefix) or mention()
+            literal(sixenn.configuration.defaultPrefix) or mention()
         }
     }
     configure()

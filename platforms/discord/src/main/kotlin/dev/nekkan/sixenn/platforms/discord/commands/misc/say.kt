@@ -10,7 +10,7 @@ import dev.kord.x.commands.annotation.ModuleName
 import dev.kord.x.commands.argument.text.StringArgument
 import dev.kord.x.commands.kord.module.command
 import dev.kord.x.commands.model.command.invoke
-import dev.nekkan.sixenn.platforms.discord.sixennConfig
+import dev.nekkan.sixenn.platforms.discord.sixenn
 
 @ModuleName("say-command")
 fun sayCommand() = command("say") {
@@ -19,7 +19,7 @@ fun sayCommand() = command("say") {
         message.delete()
         channel.createMessage {
             content =
-                if (author.id.value != sixennConfig.sixenn.ownerId) "*Enviado por ${author.mention}*\n\n$text" else text
+                if (author.id.value != sixenn.configuration.sixenn.ownerId) "*Enviado por ${author.mention}*\n\n$text" else text
             allowedMentions = AllowedMentionsBuilder()
         }
     }

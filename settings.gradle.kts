@@ -1,6 +1,10 @@
 rootProject.name = "sixenn"
 
 include(
-    ":platforms:common",
-    ":platforms:discord"
+    ":common",
+    ":commands",
+    ":platforms:discord",
+    ":minigames:common",
+    ":minigames:core",
+    ":locale"
 )
