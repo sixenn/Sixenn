@@ -1,0 +1,7 @@
+sixenn {
+    ownerId = 852628330611474432
+    defaultPrefix = "-"
+    discord {
+        token = ""
+    }
+}
