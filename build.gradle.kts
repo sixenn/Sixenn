@@ -1,16 +1,16 @@
 @file:Suppress("PropertyName")
 
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-    kotlin("jvm") version "1.5.10"
+    kotlin("multiplatform") version "1.5.10"
     kotlin("plugin.serialization") version "1.5.0"
 }
 
 val coroutines_version: String by project
+val datetime_version: String by project
+val config4k_version: String by project
 
 allprojects {
-    apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "org.jetbrains.kotlin.multiplatform")
     apply(plugin = "org.jetbrains.kotlin.plugin.serialization")
 
     repositories {
@@ -19,15 +19,28 @@ allprojects {
         mavenCentral()
     }
 
-    dependencies {
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
-        implementation("io.github.config4k:config4k:0.5.0-SNAPSHOT")
-        implementation("org.slf4j:slf4j-api:1.7.31")
-        implementation("ch.qos.logback:logback-classic:1.2.3")
-    }
-
-    tasks.withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "13"
-        kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+    kotlin {
+        jvm {
+            compilations.all {
+                kotlinOptions {
+                    jvmTarget = "11"
+                    freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+                }
+            }
+        }
+        js {
+            browser()
+        }
+        val commonMain by sourceSets.getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetime_version")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
+            }
+        }
+        val jvmMain by sourceSets.getting {
+            dependencies {
+                implementation("io.github.config4k:config4k:$config4k_version")
+            }
+        }
     }
 }

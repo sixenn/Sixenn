@@ -6,5 +6,6 @@ include(
     ":platforms:discord",
     ":minigames:common",
     ":minigames:core",
-    ":locale"
+    ":locale",
+    ":web:backend"
 )

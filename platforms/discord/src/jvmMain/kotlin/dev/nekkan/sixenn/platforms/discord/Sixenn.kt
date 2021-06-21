@@ -1,3 +1,4 @@
+@file:JvmName("Sixenn")
 @file:AutoWired
 
 package dev.nekkan.sixenn.platforms.discord
@@ -12,7 +13,6 @@ import dev.kord.x.commands.model.prefix.or
 import dev.nekkan.sixenn.common.Sixenn
 import dev.nekkan.sixenn.platforms.discord.services.EmptyServices
 import io.github.config4k.extract
-import kapt.kotlin.generated.configure
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 object SixennDiscord : Sixenn<DiscordSixennConfiguration, EmptyServices> {
@@ -34,5 +34,5 @@ suspend fun main() = bot(sixenn.configuration.sixenn.discord.token) {
             literal(sixenn.configuration.defaultPrefix) or mention()
         }
     }
-    configure()
+    //configure()
 }
