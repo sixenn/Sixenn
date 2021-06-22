@@ -1,0 +1,12 @@
+discord {
+    ownerId = 852628330611474432
+    defaultPrefix = "-"
+    token = "totally real token"
+}
+twitter {
+    prefix = "@SixennBot"
+}
+directories {
+    assets = "/home/linuxuserlol/sixenn/assets"
+}
+

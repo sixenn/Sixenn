@@ -3,6 +3,7 @@
 plugins {
     kotlin("multiplatform") version "1.5.10"
     kotlin("plugin.serialization") version "1.5.0"
+    id("org.ajoberstar.grgit") version "4.1.0"
 }
 
 val coroutines_version: String by project
@@ -12,6 +13,7 @@ val config4k_version: String by project
 allprojects {
     apply(plugin = "org.jetbrains.kotlin.multiplatform")
     apply(plugin = "org.jetbrains.kotlin.plugin.serialization")
+    apply(plugin = "org.ajoberstar.grgit")
 
     repositories {
         maven(url = "https://oss.sonatype.org/content/repositories/snapshots")
@@ -28,17 +30,6 @@ allprojects {
                 }
             }
         }
-        js {
-            browser()
-        }
-        val hostOs = System.getProperty("os.name")
-        val isMingwX64 = hostOs.startsWith("Windows")
-        val nativeTarget = when {
-            hostOs == "Mac OS X" -> macosX64("native")
-            hostOs == "Linux" -> linuxX64("native")
-            isMingwX64 -> mingwX64("native")
-            else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
-        }
         val commonMain by sourceSets.getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetime_version")
@@ -50,5 +41,18 @@ allprojects {
                 implementation("io.github.config4k:config4k:$config4k_version")
             }
         }
+    }
+    base {
+        val versionMetadata: String by lazy {
+            with(System.getenv("GITHUB_RUN_NUMBER")) {
+                if (this != null) return@lazy "build.$this"
+            }
+            val id = with(grgit.head().abbreviatedId) {
+                if (!grgit.status().isClean) "$this-dirty" else this
+            }
+            "rev.$id"
+        }
+        val projectName = if (project.name == "sixenn") "sixenn-root" else "sixenn-${project.name}"
+        archivesName.set("$projectName-$versionMetadata")
     }
 }

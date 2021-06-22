@@ -1,7 +1,7 @@
 @file:JvmName("SayCommand")
 @file:AutoWired
 
-package dev.nekkan.sixenn.platforms.discord.commands.common.misc
+package dev.nekkan.sixenn.platforms.discord.commands.exclusive.misc
 
 import dev.kord.core.behavior.channel.createMessage
 import dev.kord.rest.builder.message.AllowedMentionsBuilder
@@ -16,10 +16,9 @@ import dev.nekkan.sixenn.platforms.discord.sixenn
 fun sayCommand() = command("say") {
     alias("falar")
     invoke(StringArgument) { text ->
-        message.delete()
         channel.createMessage {
             content =
-                if (author.id.value != sixenn.configuration.sixenn.ownerId) "*Enviado por ${author.mention}*\n\n$text" else text
+                if (author.id.value != sixenn.configuration.discord.ownerId) "*Enviado por ${author.mention}*\n\n$text" else text
             allowedMentions = AllowedMentionsBuilder()
         }
     }
