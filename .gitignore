@@ -2,3 +2,5 @@ sixenn.conf
 .gradle/
 .idea/
 build/
+.env
+.env.production

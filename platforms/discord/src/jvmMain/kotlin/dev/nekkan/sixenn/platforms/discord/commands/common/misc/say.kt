@@ -1,7 +1,7 @@
 @file:JvmName("SayCommand")
 @file:AutoWired
 
-package dev.nekkan.sixenn.platforms.discord.commands.misc
+package dev.nekkan.sixenn.platforms.discord.commands.common.misc
 
 import dev.kord.core.behavior.channel.createMessage
 import dev.kord.rest.builder.message.AllowedMentionsBuilder

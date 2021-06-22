@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+  database:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    networks:
+      - postgres-network
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/sixenn/development/postgresql:/var/lib/postgresql/data
+networks:
+  postgres-network:
+    driver: bridge

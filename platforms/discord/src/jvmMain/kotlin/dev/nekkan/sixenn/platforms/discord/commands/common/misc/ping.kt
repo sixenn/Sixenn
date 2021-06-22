@@ -1,6 +1,6 @@
 @file:JvmName("PingCommand")
 @file:AutoWired
-package dev.nekkan.sixenn.platforms.discord.commands.misc
+package dev.nekkan.sixenn.platforms.discord.commands.common.misc
 
 import dev.kord.x.commands.annotation.AutoWired
 import dev.kord.x.commands.annotation.ModuleName
