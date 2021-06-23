@@ -25,13 +25,14 @@ allprojects {
         jvm {
             compilations.all {
                 kotlinOptions {
-                    jvmTarget = "13"
+                    jvmTarget = "11"
                     freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
                 }
             }
         }
         val commonMain by sourceSets.getting {
             dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetime_version")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
             }
@@ -39,6 +40,8 @@ allprojects {
         val jvmMain by sourceSets.getting {
             dependencies {
                 implementation("io.github.config4k:config4k:$config4k_version")
+                implementation("org.slf4j:slf4j-api:1.7.31")
+                implementation("ch.qos.logback:logback-classic:1.2.3")
             }
         }
     }

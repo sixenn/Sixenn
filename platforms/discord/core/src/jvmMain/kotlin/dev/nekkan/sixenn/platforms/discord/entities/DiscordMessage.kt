@@ -3,7 +3,7 @@ package dev.nekkan.sixenn.platforms.discord.entities
 import dev.kord.core.behavior.channel.createMessage
 import dev.nekkan.sixenn.common.builders.BaseStyledResponseBuilder
 import dev.nekkan.sixenn.common.entities.Message
-import dev.nekkan.sixenn.platforms.discord.config.DiscordSixennIdentification
+import dev.nekkan.sixenn.platforms.discord.common.DiscordSixennIdentification
 import dev.nekkan.sixenn.platforms.discord.utils.identification
 import kotlinx.datetime.Instant
 

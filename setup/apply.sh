@@ -9,4 +9,5 @@ TARGET=${1:-~/sixenn}
 mkdir -p "$TARGET"
 
 cp ./sixenn.conf "$TARGET/"
-cp ../locale/translations "$TARGET/"
+cp ./sixenn.production.conf "$TARGET/"
+cp -r ../locale/translations "$TARGET/"

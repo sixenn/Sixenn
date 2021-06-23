@@ -1,4 +1,4 @@
-package dev.nekkan.sixenn.platforms.discord.config
+package dev.nekkan.sixenn.platforms.discord.common
 
 import dev.kord.common.entity.Snowflake
 import dev.nekkan.sixenn.common.configuration.BaseSixennIdentification

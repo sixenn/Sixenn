@@ -3,9 +3,19 @@ discord {
     defaultPrefix = "-"
     token = "totally real token"
 }
+
+database {
+    user = "sixenn-user"
+    password = "pass"
+    database = "sixenn"
+    host = "localhost"
+    port = 5432
+}
+
 twitter {
     prefix = "@SixennBot"
 }
+
 directories {
     assets = "/home/linuxuserlol/sixenn/assets"
 }

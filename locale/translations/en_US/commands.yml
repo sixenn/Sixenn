@@ -1,0 +1,8 @@
+commands:
+  misc:
+    ping:
+      calculating: "Calculating..."
+      implementation: "Implementation"
+      latency: "Latency"
+    say:
+      sent-by: "Sent by {0}"

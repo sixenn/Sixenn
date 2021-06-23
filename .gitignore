@@ -1,4 +1,5 @@
 sixenn.conf
+sixenn.production.conf
 .gradle/
 .idea/
 build/
