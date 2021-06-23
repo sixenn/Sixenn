@@ -10,7 +10,9 @@ import dev.kord.x.commands.annotation.ModuleName
 import dev.kord.x.commands.argument.text.StringArgument
 import dev.kord.x.commands.kord.module.command
 import dev.kord.x.commands.model.command.invoke
+import dev.nekkan.sixenn.locale.get
 import dev.nekkan.sixenn.platforms.discord.sixenn
+import dev.nekkan.sixenn.platforms.discord.utils.locale
 
 @ModuleName("say-command")
 fun sayCommand() = command("say") {
@@ -18,7 +20,9 @@ fun sayCommand() = command("say") {
     invoke(StringArgument) { text ->
         channel.createMessage {
             content =
-                if (author.id.value != sixenn.configuration.discord.ownerId) "*Enviado por ${author.mention}*\n\n$text" else text
+                if (author.id.value != sixenn.configuration.discord.ownerId)
+                    "*${author.locale["commands.misc.say.sent-by".replace("{0}", author.mention)]}*\n\n$text"
+                else text
             allowedMentions = AllowedMentionsBuilder()
         }
     }

@@ -15,21 +15,20 @@ import dev.kord.x.emoji.Emojis
 import dev.nekkan.sixenn.locale.Language
 import dev.nekkan.sixenn.locale.get
 import dev.nekkan.sixenn.platforms.discord.common.utils.randomColor
+import dev.nekkan.sixenn.platforms.discord.utils.locale
 import kotlinx.datetime.Clock
 import kotlin.time.ExperimentalTime
 
 @OptIn(ExperimentalTime::class)
 @ModuleName("ping-command")
 fun pingCommand() = command("ping") {
-    val messages = Language.Portuguese_BR
-
-    suspend fun KordCommandEvent.calculatePing(): Pair<Message, Long> {
+    suspend fun KordCommandEvent.calculatePing(messages: Language): Pair<Message, Long> {
         val message = respond("${author.mention} ${messages["commands.misc.ping.calculating"]}")
         val ping = (message.timestamp - this.message.timestamp).inWholeMilliseconds
         return message to ping
     }
 
-    suspend fun MessageModifyBuilder.createEmbed(author: User, ping: Long, apiPing: Long) = embed {
+    suspend fun MessageModifyBuilder.createEmbed(messages: Language, author: User, ping: Long, apiPing: Long) = embed {
         color = randomColor()
         title = "${Emojis.pingPong} ${messages["commands.misc.ping.latency"]}"
         field("Discord API") {
@@ -46,11 +45,12 @@ fun pingCommand() = command("ping") {
     }
 
     invoke {
+        val locale = author.locale
         val apiPing = kord.gateway.gateways.values.map { it.ping.value }.first()?.inWholeMilliseconds ?: Long.MAX_VALUE
-        val (message, ping) = calculatePing()
+        val (message, ping) = calculatePing(locale)
         message.edit {
             content = author.mention
-            createEmbed(author, ping, apiPing)
+            createEmbed(locale, author, ping, apiPing)
         }
     }
 }
