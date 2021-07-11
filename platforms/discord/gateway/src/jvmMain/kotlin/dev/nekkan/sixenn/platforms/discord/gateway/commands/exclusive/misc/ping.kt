@@ -17,6 +17,7 @@ import dev.nekkan.sixenn.locale.get
 import dev.nekkan.sixenn.platforms.discord.common.utils.randomColor
 import dev.nekkan.sixenn.platforms.discord.gateway.utils.locale
 import kotlinx.datetime.Clock
+import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime
 
 @OptIn(ExperimentalTime::class)
@@ -24,7 +25,7 @@ import kotlin.time.ExperimentalTime
 fun pingCommand() = command("ping") {
     suspend fun KordCommandEvent.calculatePing(messages: Language): Pair<Message, Double> {
         val message = respond("${author.mention} ${messages["commands.misc.ping.calculating"]}")
-        val ping = (message.timestamp - this.message.timestamp).inMilliseconds
+        val ping = (message.timestamp - this.message.timestamp).toDouble(DurationUnit.MILLISECONDS)
         return message to ping
     }
 
@@ -40,10 +41,10 @@ fun pingCommand() = command("ping") {
             }
             footer {
                 text = messages["embeds.executed-by"].toString().replace("{0}", author.tag)
-            icon = author.avatar.url
+                icon = author.avatar.url
+            }
+            timestamp = Clock.System.now()
         }
-        timestamp = Clock.System.now()
-    }
 
     invoke {
         val locale = author.locale
