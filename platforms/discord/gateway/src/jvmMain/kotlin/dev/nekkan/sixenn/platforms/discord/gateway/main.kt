@@ -17,7 +17,7 @@ import kapt.kotlin.generated.configure
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 object SixennDiscord : Sixenn<DiscordSixennConfiguration, EmptyServices> {
 
-    override val configuration = DiscordSixennConfiguration.INSTANCE
+    override val configuration = DiscordSixennConfiguration()
 
     override val services: EmptyServices
         get() = EmptyServices

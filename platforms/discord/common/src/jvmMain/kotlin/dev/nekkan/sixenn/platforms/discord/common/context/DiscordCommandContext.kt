@@ -1,4 +1,4 @@
-package dev.nekkan.sixenn.platforms.discord.gateway.commands
+package dev.nekkan.sixenn.platforms.discord.common.context
 
 import dev.nekkan.sixenn.common.command.BaseCommandContext
 import dev.nekkan.sixenn.common.command.arguments.Argument

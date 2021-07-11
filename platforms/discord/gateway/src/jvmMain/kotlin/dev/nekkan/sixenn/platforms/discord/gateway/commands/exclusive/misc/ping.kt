@@ -22,23 +22,24 @@ import kotlin.time.ExperimentalTime
 @OptIn(ExperimentalTime::class)
 @ModuleName("ping-command")
 fun pingCommand() = command("ping") {
-    suspend fun KordCommandEvent.calculatePing(messages: Language): Pair<Message, Long> {
+    suspend fun KordCommandEvent.calculatePing(messages: Language): Pair<Message, Double> {
         val message = respond("${author.mention} ${messages["commands.misc.ping.calculating"]}")
-        val ping = (message.timestamp - this.message.timestamp).inWholeMilliseconds
+        val ping = (message.timestamp - this.message.timestamp).inMilliseconds
         return message to ping
     }
 
-    suspend fun MessageModifyBuilder.createEmbed(messages: Language, author: User, ping: Long, apiPing: Long) = embed {
-        color = randomColor()
-        title = "${Emojis.pingPong} ${messages["commands.misc.ping.latency"]}"
-        field("Discord API") {
-            "<a:discordblob:856988891776417852> **API** » $apiPing ms"
-        }
-        field(messages["commands.misc.ping.implementation"].toString()) {
-            "${Emojis.smallOrangeDiamond} **Ping** » $ping ms"
-        }
-        footer {
-            text = messages["embeds.executed-by"].toString().replace("{0}", author.tag)
+    suspend fun MessageModifyBuilder.createEmbed(messages: Language, author: User, ping: Double, apiPing: Long) =
+        embed {
+            color = randomColor()
+            title = "${Emojis.pingPong} ${messages["commands.misc.ping.latency"]}"
+            field("Discord API") {
+                "<a:discordblob:856988891776417852> **API** » $apiPing ms"
+            }
+            field(messages["commands.misc.ping.implementation"].toString()) {
+                "${Emojis.smallOrangeDiamond} **Ping** » $ping ms"
+            }
+            footer {
+                text = messages["embeds.executed-by"].toString().replace("{0}", author.tag)
             icon = author.avatar.url
         }
         timestamp = Clock.System.now()

@@ -11,8 +11,8 @@ import dev.kord.x.commands.argument.text.StringArgument
 import dev.kord.x.commands.kord.module.command
 import dev.kord.x.commands.model.command.invoke
 import dev.nekkan.sixenn.locale.get
+import dev.nekkan.sixenn.platforms.discord.gateway.sixenn
 import dev.nekkan.sixenn.platforms.discord.gateway.utils.locale
-import dev.nekkan.sixenn.platforms.discord.sixenn
 
 @ModuleName("say-command")
 fun sayCommand() = command("say") {
