@@ -1,7 +1,7 @@
 @file:Suppress("PropertyName")
 
 plugins {
-    kotlin("multiplatform") version "1.5.10"
+    kotlin("multiplatform") version "1.5.20"
     kotlin("plugin.serialization") version "1.5.0"
     id("org.ajoberstar.grgit") version "4.1.0"
 }
@@ -26,7 +26,7 @@ allprojects {
             compilations.all {
                 kotlinOptions {
                     jvmTarget = "11"
-                    freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+                    freeCompilerArgs += listOf("-Xjsr305=strict", "-Xopt-in=kotlin.RequiresOptIn")
                 }
             }
         }
@@ -45,6 +45,7 @@ allprojects {
             }
         }
     }
+
     base {
         val versionMetadata: String by lazy {
             with(System.getenv("GITHUB_RUN_NUMBER")) {

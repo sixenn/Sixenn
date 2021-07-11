@@ -1,7 +1,10 @@
 discord {
-    ownerId = 852628330611474432
-    defaultPrefix = "-"
-    token = "totally real token"
+  server {
+    port = 7893
+  }
+  ownerId = 852628330611474432
+  defaultPrefix = "-"
+  token = "totally real token"
 }
 
 database {
@@ -16,7 +19,4 @@ twitter {
     prefix = "@SixennBot"
 }
 
-directories {
-    assets = "/home/linuxuserlol/sixenn/assets"
-}
 

@@ -12,8 +12,7 @@ import io.github.config4k.extract
 
 data class DiscordSixennConfiguration(
     val discord: SixennDiscordConfig,
-    val database: SixennDatabaseConfig,
-    val web: SixennWebConfig,
+    val database: SixennDatabaseConfig
 ) : BaseSixennConfiguration<DiscordSixennIdentification, BaseSixennAuthenticator> {
 
     companion object {
@@ -30,6 +29,8 @@ data class DiscordSixennConfiguration(
                 )
             ).extract<DiscordSixennConfiguration>()
         }
+
+        inline operator fun invoke() = INSTANCE
 
     }
 
@@ -55,12 +56,8 @@ data class SixennDatabaseConfig(
 data class SixennDiscordConfig(
     val ownerId: Long,
     val defaultPrefix: String,
-    val token: String
-)
-
-data class SixennWebConfig(
-    val rest: SixennPortConfig,
-    val frontend: SixennPortConfig
+    val token: String,
+    val server: SixennPortConfig
 )
 
 data class SixennPortConfig(val port: Int)
