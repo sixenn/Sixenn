@@ -1,0 +1,6 @@
+discord:
+  token: "asdkojasdkjsadsa"
+  application_id: 456546456
+  testing_server_id: 43535434
+  public_key: "4565465dsfdgdf644"
+  interactions_port: 27604

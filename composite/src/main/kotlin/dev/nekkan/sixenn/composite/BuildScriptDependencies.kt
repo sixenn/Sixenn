@@ -23,8 +23,21 @@ object BuildScriptDependencies {
 
     sealed class Platform {
         object Discord : Platform() {
-            const val Kord = "dev.kord:kord-core:0.8.0-M7"
-            const val DiscordInteraKTions = "net.perfectdreams.discordinteraktions:webserver-ktor-kord:0.0.9"
+            const val Core = "dev.kord:kord-core:0.8.0-M7"
+            const val Common = "dev.kord:kord-common:0.8.0-M7"
+            const val InteraKTions = "net.perfectdreams.discordinteraktions:gateway-kord:0.0.10-SNAPSHOT"
+            const val InteraKTionsWebServer =
+                "net.perfectdreams.discordinteraktions:webserver-ktor-kord:0.0.10-SNAPSHOT"
+            const val Emoji = "dev.kord.x:emoji:0.5.0"
         }
     }
+
+    object Logging {
+        const val version = "2.0.10"
+        const val KotlinLogging = "io.github.microutils:kotlin-logging-jvm:$version"
+        const val Slf4J = "org.slf4j:slf4j-api:1.7.29"
+    }
+
+    const val I18nHelper = "net.perfectdreams.i18nhelper:core:0.0.2-SNAPSHOT"
+    const val SerializationKaml = "com.charleskorn.kaml:kaml:0.37.0"
 }

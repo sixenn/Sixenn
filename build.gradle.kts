@@ -25,6 +25,8 @@ allprojects {
     dependencies {
         api(BuildScriptDependencies.Kotlin.Coroutines)
         api(BuildScriptDependencies.Kotlin.Serialization)
+        api(BuildScriptDependencies.Logging.Slf4J)
+        api(BuildScriptDependencies.Logging.KotlinLogging)
     }
 
     fun getGitBuild() = with(System.getenv("GITHUB_RUN_NUMBER")) { if (this != null) "build.$this" else this }
@@ -48,5 +50,6 @@ allprojects {
 
     tasks.withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "17"
+        kotlinOptions.freeCompilerArgs += listOf("-opt-in=kotlin.RequiresOptIn")
     }
 }

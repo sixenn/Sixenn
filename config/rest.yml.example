@@ -1,0 +1,9 @@
+rest:
+  port: 4040
+  database:
+    # driver = "org.postgresql.Driver" - It always will be PostgreSQL
+    # url = "jdbc:postgresql://localhost:5432/rest" - The backend will generate the URL.
+    user: "rest"
+    password: "rest"
+    host: "localhost"
+    port: 5432

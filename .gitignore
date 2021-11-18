@@ -52,3 +52,6 @@ outTmp/
 /kotlin-native/dist
 kotlin-ide/
 .env
+*.yml
+!*.locale.yml
+!*.yml.example
